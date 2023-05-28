@@ -1,0 +1,57 @@
+.heading{
+    text-align: center;
+}
+.rotateLeft{
+    transform: rotate(180deg);
+}
+.imageLeft {
+  height: 150px;
+  width: 40%;
+  /* margin: 5em 2em; */
+  background: radial-gradient(circle at right center, transparent, transparent 40px, #00000050 40px, #00000050);
+  border-radius: 8px;
+  position: relative;
+}
+.imageRight{
+  height: 150px;
+  width: 40%;
+  /* margin: 5em 2em; */
+  background: radial-gradient(circle at left center, transparent, transparent 40px, #00000050 40px, #00000050);
+  border-radius: 8px;
+  position: relative;
+}
+
+.imageLeft p, .imageRight p{
+  color: #fff;
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputForms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+.container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#outlined-helperText{
+  border: none;
+}

@@ -1,95 +1,124 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+// require("dotenv").config();
+// Material Components
+import Typography from "@mui/material/Typography";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import TextField from "@mui/material/TextField";
+// import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
+// CSS files
+import "./styling/mainStyle.css";
+
+// Assets
+// import InputBg from "./assets/Images/InputBg.jsx";
 
 export default function Home() {
+  const [currencyValue, setCurrencyValue] = useState({
+    toValue: 0,
+    fromValue: 0,
+    toCurrency: "",
+    fromCurrency: "INR",
+  });
+  const [rates, setRates] = useState(null);
+  const baseURL = "http://data.fixer.io/api/";
+  const apiKey = `${process.env.NEXT_PUBLIC_API_KEY}`;
+  useEffect(() => {
+    const getLatestExchangeRates = async () => {
+      try {
+        const response = await axios.get(
+          `${baseURL}latest?access_key=${apiKey}`
+        );
+        console.log(response);
+        setRates(response.data.rates);
+      } catch (error) {
+        console.error("Error fetching exchange rates:", error);
+      }
+    };
+
+    getLatestExchangeRates();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCurrencyValue((prevCurrencyValue) => {
+      return { ...prevCurrencyValue, [name]: value };
+    });
+  };
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <div>
+      <Typography className="heading" variant="h2" gutterBottom>
+        Currency Converter
+      </Typography>
+      <div className="inputForms">
+        <div className="imageLeft">
+          <div className="container">
+            <TextField
+              id="standard-helperText"
+              label="From"
+              helperText="Some important text"
+              value={currencyValue.fromValue}
+              name="fromValue"
+              onChange={handleChange}
+              variant="standard"
             />
-          </a>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                value={currencyValue.fromCurrency}
+                onChange={handleChange}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                name="fromCurrency"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+              <FormHelperText>Without label</FormHelperText>
+            </FormControl>
+          </div>
+        </div>
+        <SwapHorizIcon style={{ color: "#1e5ef3" }} />
+        <div className="imageRight">
+          <div className="container">
+            <TextField
+              id="standard-helperText"
+              label="To"
+              helperText="Some important text"
+              value={currencyValue.toValue}
+              name="toValue"
+              onChange={handleChange}
+              variant="standard"
+            />
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                value={currencyValue.toCurrency}
+                onChange={handleChange}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                name="toCurrency"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+              <FormHelperText>Without label</FormHelperText>
+            </FormControl>
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }
