@@ -15,6 +15,7 @@ import Select from "@mui/material/Select";
 
 // CSS files
 import "./styling/mainStyle.css";
+import { CleaningServices } from "@mui/icons-material";
 
 // Assets
 // import InputBg from "./assets/Images/InputBg.jsx";
@@ -23,33 +24,132 @@ export default function Home() {
   const [currencyValue, setCurrencyValue] = useState({
     toValue: 0,
     fromValue: 0,
-    toCurrency: "",
-    fromCurrency: "INR",
+    toCurrency: "INR",
+    fromCurrency: "USD",
   });
+  const [currencyList, setCurrenyList] = useState([]);
   const [rates, setRates] = useState(null);
   const baseURL = "http://data.fixer.io/api/";
   const apiKey = `${process.env.NEXT_PUBLIC_API_KEY}`;
+
   useEffect(() => {
-    const getLatestExchangeRates = async () => {
-      try {
-        const response = await axios.get(
-          `${baseURL}latest?access_key=${apiKey}`
-        );
-        console.log(response);
-        setRates(response.data.rates);
-      } catch (error) {
-        console.error("Error fetching exchange rates:", error);
+    const storeDataInLocalStorage = (key, data) => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(key, JSON.stringify(data));
       }
     };
+    const retrieveDataFromLocalStorage = (key) => {
+      if (typeof window !== "undefined") {
+        const storedData = localStorage.getItem(key);
+        return storedData ? JSON.parse(storedData) : null;
+      }
+      return null;
+    };
 
-    getLatestExchangeRates();
+    const today = new Date();
+    const todayDate = today.toISOString().slice(0, 10);
+
+    const dataFromLocalStorage = retrieveDataFromLocalStorage("currency");
+    const ratesDataFromLocalStorage =
+      retrieveDataFromLocalStorage("ratesDateWise");
+    if (dataFromLocalStorage) {
+      setCurrenyList(dataFromLocalStorage);
+    }
+    if (
+      ratesDataFromLocalStorage &&
+      ratesDataFromLocalStorage["date"] === todayDate
+    ) {
+      setRates(ratesDataFromLocalStorage.ratesData);
+    } else {
+      axios
+        .get(`${baseURL}latest?access_key=${apiKey}`)
+        .then((response) => {
+          try {
+            const currencyListValues = Object.keys(response.data.rates);
+
+            if (currencyListValues.length === 0) {
+              setCurrenyList(currencyListValues);
+            }
+            storeDataInLocalStorage("ratesDateWise", {
+              date: response.data.date,
+              ratesData: response.data.rates,
+            });
+            storeDataInLocalStorage("currency", currencyListValues);
+
+            setRates(response.data.rates);
+          } catch (err) {
+            console.log(err);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching exchange rates:", err);
+        });
+    }
   }, []);
 
+  const handleAmountChange = (currentCurrencyUsed, currentCurrencyValue) => {
+    if (currentCurrencyUsed === "fromValue") {
+      const newValue =
+        (currentCurrencyValue * rates[currencyValue.toCurrency]) /
+        rates[currencyValue.fromCurrency];
+      setCurrencyValue((prevCurrencyValue) => {
+        return { ...prevCurrencyValue, ["toValue"]: newValue };
+      });
+    } else {
+      const newValue =
+        (currentCurrencyValue * rates[currencyValue.fromCurrency]) /
+        rates[currencyValue.toCurrency];
+      setCurrencyValue((prevCurrencyValue) => {
+        return { ...prevCurrencyValue, ["fromValue"]: newValue };
+      });
+    }
+  };
+  const handleCurrencyChange = (
+    currentCurrencyUsed,
+    currentCurrencyValue,
+    firstCountry,
+    otherCurrency
+  ) => {
+    if (currentCurrencyUsed === "fromValue") {
+      const newValue =
+        (currentCurrencyValue * rates[otherCurrency]) / rates[firstCountry];
+      setCurrencyValue((prevCurrencyValue) => {
+        return { ...prevCurrencyValue, ["toValue"]: newValue };
+      });
+    } else {
+      const newValue =
+        (currentCurrencyValue * rates[otherCurrency]) / rates[firstCountry];
+      setCurrencyValue((prevCurrencyValue) => {
+        return { ...prevCurrencyValue, ["fromValue"]: newValue };
+      });
+    }
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
+
     setCurrencyValue((prevCurrencyValue) => {
       return { ...prevCurrencyValue, [name]: value };
     });
+    if (name === "toValue" || name === "fromValue") {
+      handleAmountChange(name, value);
+    } else {
+      if (name === "toCurrency") {
+        handleCurrencyChange(
+          "fromValue",
+          currencyValue.fromValue,
+          currencyValue.fromCurrency,
+          value
+        );
+      } else {
+        handleCurrencyChange(
+          "toValue",
+          currencyValue.toValue,
+          currencyValue.toCurrency,
+          value
+        );
+      }
+    }
   };
   return (
     <div>
@@ -76,12 +176,17 @@ export default function Home() {
                 inputProps={{ "aria-label": "Without label" }}
                 name="fromCurrency"
               >
-                <MenuItem value="">
+                {/* <MenuItem value="">
                   <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                </MenuItem> */}
+                {currencyList &&
+                  currencyList.map((currencyName, index) => {
+                    return (
+                      <MenuItem key={index} value={currencyName}>
+                        {currencyName}
+                      </MenuItem>
+                    );
+                  })}
               </Select>
               <FormHelperText>Without label</FormHelperText>
             </FormControl>
@@ -107,12 +212,17 @@ export default function Home() {
                 inputProps={{ "aria-label": "Without label" }}
                 name="toCurrency"
               >
-                <MenuItem value="">
+                {/* <MenuItem value="">
                   <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                </MenuItem> */}
+                {currencyList &&
+                  currencyList.map((currencyName, index) => {
+                    return (
+                      <MenuItem key={index} value={currencyName}>
+                        {currencyName}
+                      </MenuItem>
+                    );
+                  })}
               </Select>
               <FormHelperText>Without label</FormHelperText>
             </FormControl>
