@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 
+// CSS files
 import "../styling/Loading.css";
 
+// Loading Screen showing Currency Converter text using letter to letter typing
 function Loading(props) {
   const text = "Currency Converter";
   const [displayedText, setDisplayedText] = useState("");
 
+  // showing the text letter to letter with interval of 70ms.
   useEffect(() => {
     let currentIndex = 0;
     const typingTimer = setInterval(() => {

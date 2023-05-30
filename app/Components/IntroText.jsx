@@ -1,9 +1,13 @@
 "use client";
 import React from "react";
 
+// CSS files
 import "../styling/IntroText.css";
+
+// MUI
 import Typography from "@mui/material/Typography";
 
+// Shows IntroText with Heading
 const IntroText = () => {
   return (
     <>

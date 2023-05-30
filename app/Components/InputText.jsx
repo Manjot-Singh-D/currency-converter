@@ -1,8 +1,12 @@
 import React from "react";
+
+// MUI
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+
+// Shows the input text and select dropdown
 const InputText = ({
   label,
   value,
