@@ -1,10 +1,5 @@
 "use client";
 import React, { useState, useRef } from "react";
-import {
-  getAmountByRate,
-  getConversionRate,
-  validInput,
-} from "./Action/ActionFunctions";
 // Material Components
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 
@@ -21,13 +16,13 @@ const ConverterTextField = ({ date, currencyList, rates }) => {
   });
   const toggleBtn = useRef(null);
 
-  const getAmountByRate = (currencyValue, currency1, currency2, rates) => {
+  const getAmountByRate = (currencyValue, currency1, currency2) => {
     let newValue = (currencyValue * rates[currency1]) / rates[currency2];
     if (newValue !== 0) newValue = newValue.toFixed(4);
 
     return newValue;
   };
-  const getConversionRate = (fromCurrency, toCurrency, rates) => {
+  const getConversionRate = (fromCurrency, toCurrency) => {
     return getAmountByRate(1, toCurrency, fromCurrency, rates);
   };
   const handleAmountChange = (
