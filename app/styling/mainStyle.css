@@ -46,16 +46,29 @@
 .rotateLeft{
     transform: rotate(180deg);
 }
-.rightConverter{
+.ConverterTextField{
   flex: 5 1;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding-bottom: 30px;
 }
-.rightConverter .date{
+.ConverterTextField .date{
   margin-top: 100px;
   width: 90%;
+}
+.swappingIcon{
+  color: #1e5ef3;
+  position: absolute;
+  z-index: 10;
+  transform: rotate(90deg);
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 6px;
+  transition: transform 100ms ease !important;
+  cursor: pointer;
 }
 .inputForms{
   display: flex;
@@ -112,7 +125,7 @@
     padding-left: 0%;
     flex: 4;
   }
-  .rightConverter{
+  .ConverterTextField{
     flex: 6;
   }
   .leftText p{
@@ -132,11 +145,11 @@
     font-size: 16px !important;
     width: 90%;
   }
-  .rightConverter{
+  .ConverterTextField{
     width: 90%;
     margin: auto;
   }
-  .rightConverter .date{
+  .ConverterTextField .date{
     margin-top: 20px;
     /* width: 70%; */
   }
@@ -156,7 +169,7 @@
   .heading{
     font-size:30px !important;
   }
-  .rightConverter .date{
+  .ConverterTextField .date{
     margin-top: 0px;
     font-size: 12px;
   }

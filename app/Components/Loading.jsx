@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import "../styling/loadingComponent.css";
+import "../styling/Loading.css";
 
-function LoadingComponent(props) {
+function Loading(props) {
   const text = "Currency Converter";
   const [displayedText, setDisplayedText] = useState("");
 
@@ -33,4 +33,4 @@ function LoadingComponent(props) {
   );
 }
 
-export default LoadingComponent;
+export default Loading;
