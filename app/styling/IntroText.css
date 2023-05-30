@@ -1,0 +1,49 @@
+.IntroText{
+    flex: 5;
+    padding-left: 30px;
+}
+.IntroText p{
+    font-size: 20px;
+    width: 80%;
+    padding-left: 30px;
+    text-align: justify;
+}
+.heading{
+    font-weight: 400;
+    color:"#ffffff";
+    font-family: cursive !important;
+    margin-top: 100px !important;
+    padding-left: 30px;
+}
+
+@media screen and (max-width:900px){
+    .IntroText{
+      padding-left: 0%;
+      flex: 4;
+    }
+    .IntroText p{
+      font-size: 16px;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .IntroText p{
+        font-size: 16px !important;
+        width: 90%;
+    }
+    .heading{
+        margin-top: 20px !important;
+        font-size: 50px !important;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .IntroText p{
+        font-size: 16px !important;
+        padding-left: 10px;
+    }
+    .IntroText .heading{
+        padding-left: 10px;
+        font-size:30px !important;
+    }
+}

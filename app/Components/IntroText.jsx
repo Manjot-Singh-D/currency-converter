@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 
-import "../styling/mainStyle.css";
+import "../styling/IntroText.css";
 import Typography from "@mui/material/Typography";
+
 const IntroText = () => {
   return (
     <>
-      <div className="leftText">
+      <div className="IntroText">
         <Typography className="heading" variant="h2" gutterBottom>
           Currency Converter
         </Typography>

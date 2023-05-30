@@ -26,26 +26,7 @@
   flex-direction: row;
   font-family: cursive;
 }
-.leftText{
-  flex: 5;
-  padding-left: 30px;
-}
-.heading{
-  font-weight: 400;
-  color:"#ffffff";
-  font-family: cursive !important;
-  margin-top: 100px !important;
-  padding-left: 30px;
-}
-.leftText p{
-  font-size: 20px;
-  width: 80%;
-  padding-left: 30px;
-  text-align: justify;
-}
-.rotateLeft{
-    transform: rotate(180deg);
-}
+
 .ConverterTextField{
   flex: 5 1;
   display: flex;
@@ -103,12 +84,9 @@
 .rotate {
   transform: rotate(-90deg) !important;
 }
-
 .fromCurrencyContainer p, .toCurrencyContainer p{
   color: #fff;
 }
-
-
 #outlined-helperText{
   border: none;
 }
@@ -121,15 +99,8 @@
 }
 
 @media screen and (max-width:900px){
-  .leftText{
-    padding-left: 0%;
-    flex: 4;
-  }
   .ConverterTextField{
     flex: 6;
-  }
-  .leftText p{
-    font-size: 16px;
   }
 }
 @media screen and (max-width:750px) {
@@ -137,21 +108,13 @@
     justify-content: flex-start;
     flex-direction: column;
   }
-  .heading{
-    margin-top: 20px !important;
-    font-size: 50px !important;
-  }
-  .leftText p{
-    font-size: 16px !important;
-    width: 90%;
-  }
+
   .ConverterTextField{
     width: 90%;
     margin: auto;
   }
   .ConverterTextField .date{
     margin-top: 20px;
-    /* width: 70%; */
   }
 }
 
@@ -165,23 +128,12 @@
   .MuiTextField-root{
     width: 80% !important;
   }
-
-  .heading{
-    font-size:30px !important;
-  }
   .ConverterTextField .date{
     margin-top: 0px;
     font-size: 12px;
   }
   .container{
     flex-direction: column;
-  }
-  .leftText p{
-    font-size: 16px !important;
-    padding-left: 10px;
-  }
-  .leftText .heading{
-    padding-left: 10px;
   }
   .conversionRate{
     bottom: -35%;

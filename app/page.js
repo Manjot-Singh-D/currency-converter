@@ -12,34 +12,33 @@ import ConverterTextField from "./Components/ConverterTextField";
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [date, setDate] = useState("");
-  const [currencyList, setCurrenyList] = useState([]);
+  const [currencyList, setCurrencyList] = useState([]);
   const [rates, setRates] = useState(null);
 
+  const storeDataInLocalStorage = (key, data) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+  };
+  const retrieveDataFromLocalStorage = (key) => {
+    if (typeof window !== "undefined") {
+      const storedData = localStorage.getItem(key);
+      return storedData ? JSON.parse(storedData) : null;
+    }
+    return null;
+  };
+  
   const baseURL = "http://data.fixer.io/api/";
   const apiKey = `${process.env.NEXT_PUBLIC_API_KEY}`;
+  const today = new Date();
+  const todayDate = today.toISOString().slice(0, 10);
+  const dataFromLocalStorage = retrieveDataFromLocalStorage("currency");
+  const ratesDataFromLocalStorage =
+    retrieveDataFromLocalStorage("ratesDateWise");
 
   useEffect(() => {
-    const storeDataInLocalStorage = (key, data) => {
-      if (typeof window !== "undefined") {
-        localStorage.setItem(key, JSON.stringify(data));
-      }
-    };
-    const retrieveDataFromLocalStorage = (key) => {
-      if (typeof window !== "undefined") {
-        const storedData = localStorage.getItem(key);
-        return storedData ? JSON.parse(storedData) : null;
-      }
-      return null;
-    };
-
-    const today = new Date();
-    const todayDate = today.toISOString().slice(0, 10);
-    const dataFromLocalStorage = retrieveDataFromLocalStorage("currency");
-    const ratesDataFromLocalStorage =
-      retrieveDataFromLocalStorage("ratesDateWise");
-
     if (dataFromLocalStorage) {
-      setCurrenyList(dataFromLocalStorage);
+      setCurrencyList(dataFromLocalStorage);
     }
     if (
       ratesDataFromLocalStorage &&
@@ -54,7 +53,7 @@ export default function Home() {
           try {
             const currencyListValues = Object.keys(response.data.rates);
 
-            setCurrenyList(currencyListValues);
+            setCurrencyList(currencyListValues);
             storeDataInLocalStorage("ratesDateWise", {
               date: response.data.date,
               ratesData: response.data.rates,
