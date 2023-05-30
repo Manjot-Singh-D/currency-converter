@@ -1,46 +1,69 @@
+.MuiFormLabel-root,.MuiInput-input{
+  color: #ffffff !important;
+  font-family: cursive !important;
+}
+
+.MuiInputBase-root:before{
+  border-bottom: 1px solid #ffffff !important;
+}
+
+.MuiOutlinedInput-notchedOutline{
+  border: none !important;
+}
+.MuiSelect-select{
+  color: #ffffff !important;
+  font-family: cursive !important;
+}
+.MuiFormControl-root .MuiSvgIcon-root{
+  color: #ffffff !important;
+}
+.app{
+  background: #242425;
+  min-height: 100vh;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  font-family: cursive;
+}
+.leftText{
+  flex: 5;
+  padding-left: 30px;
+}
 .heading{
-    text-align: center;
+  font-weight: 400;
+  color:"#ffffff";
+  font-family: cursive !important;
+  margin-top: 100px !important;
+  padding-left: 30px;
+}
+.leftText p{
+  font-size: 20px;
+  width: 80%;
+  padding-left: 30px;
+  text-align: justify;
 }
 .rotateLeft{
     transform: rotate(180deg);
 }
-.imageLeft {
-  height: 150px;
-  width: 40%;
-  /* margin: 5em 2em; */
-  background: radial-gradient(circle at right center, transparent, transparent 40px, #00000050 40px, #00000050);
-  border-radius: 8px;
-  position: relative;
+.rightConverter{
+  flex: 5 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 30px;
 }
-.imageRight{
-  height: 150px;
-  width: 40%;
-  /* margin: 5em 2em; */
-  background: radial-gradient(circle at left center, transparent, transparent 40px, #00000050 40px, #00000050);
-  border-radius: 8px;
-  position: relative;
+.rightConverter .date{
+  margin-top: 100px;
+  width: 90%;
 }
-
-.imageLeft p, .imageRight p{
-  color: #fff;
-}
-.circle {
-  width: 50px;
-  height: 50px;
-  background: red;
-  border-radius: 50%;
-  position: absolute;
-  right: 0%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .inputForms{
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  gap: 20px;
+  flex-direction: column;
+  width: 100%;
+  
 }
 .container{
   width: 100%;
@@ -52,6 +75,102 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.fromCurrencyContainer, .toCurrencyContainer{
+  height: 200px;
+  width: 90%;
+  position: relative;
+  border-radius: 15px;
+}
+.fromCurrencyContainer{
+  background: #2FAAE6;
+}
+.toCurrencyContainer{
+  background:#004E80;
+}
+.rotate {
+  transform: rotate(-90deg) !important;
+}
+
+.fromCurrencyContainer p, .toCurrencyContainer p{
+  color: #fff;
+}
+
+
 #outlined-helperText{
   border: none;
+}
+.conversionRate{
+  position: absolute;
+  left: 50%;
+  bottom: -90%;
+  transform: translate(-60%, 50%);
+  font-size: 13px;
+}
+
+@media screen and (max-width:900px){
+  .leftText{
+    padding-left: 0%;
+    flex: 4;
+  }
+  .rightConverter{
+    flex: 6;
+  }
+  .leftText p{
+    font-size: 16px;
+  }
+}
+@media screen and (max-width:750px) {
+  .app{
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  .heading{
+    margin-top: 20px !important;
+    font-size: 50px !important;
+  }
+  .leftText p{
+    font-size: 16px !important;
+    width: 90%;
+  }
+  .rightConverter{
+    width: 90%;
+    margin: auto;
+  }
+  .rightConverter .date{
+    margin-top: 20px;
+    /* width: 70%; */
+  }
+}
+
+@media screen and (max-width:480px) {
+  .MuiInputBase-root{
+    width: 90% !important;
+  }
+  .MuiFormControl-root{
+    width: 45% !important;
+  }
+  .MuiTextField-root{
+    width: 80% !important;
+  }
+
+  .heading{
+    font-size:30px !important;
+  }
+  .rightConverter .date{
+    margin-top: 0px;
+    font-size: 12px;
+  }
+  .container{
+    flex-direction: column;
+  }
+  .leftText p{
+    font-size: 16px !important;
+    padding-left: 10px;
+  }
+  .leftText .heading{
+    padding-left: 10px;
+  }
+  .conversionRate{
+    bottom: -35%;
+  }
 }

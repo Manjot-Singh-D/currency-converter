@@ -1,0 +1,13 @@
+.loading-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.loading-text{
+    border: 1px solid #ffffff;
+    width: 400px;
+    text-align: center;
+    padding: 1rem;
+}
