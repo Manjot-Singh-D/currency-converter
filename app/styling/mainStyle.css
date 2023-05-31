@@ -1,6 +1,6 @@
 .MuiFormLabel-root,.MuiInput-input{
   color: #ffffff !important;
-  font-family: cursive !important;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .MuiInputBase-root:before{
@@ -12,7 +12,7 @@
 }
 .MuiSelect-select{
   color: #ffffff !important;
-  font-family: cursive !important;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 .MuiFormControl-root .MuiSvgIcon-root{
   color: #ffffff !important;
@@ -24,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  font-family: cursive;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .ConverterTextField{
@@ -97,7 +97,11 @@
   transform: translate(-60%, 50%);
   font-size: 13px;
 }
-
+@media screen and (min-width:1000px){
+  .app{
+    padding:0px 5%;
+  }
+}
 @media screen and (max-width:900px){
   .ConverterTextField{
     flex: 6;

@@ -6,12 +6,11 @@
     font-size: 20px;
     width: 80%;
     padding-left: 30px;
-    text-align: justify;
 }
 .heading{
     font-weight: 400;
     color:"#ffffff";
-    font-family: cursive !important;
+    font-family: Arial, Helvetica, sans-serif !important;
     margin-top: 100px !important;
     padding-left: 30px;
 }
@@ -19,7 +18,7 @@
 @media screen and (max-width:900px){
     .IntroText{
       padding-left: 0%;
-      flex: 4;
+      flex: 0;
     }
     .IntroText p{
       font-size: 16px;

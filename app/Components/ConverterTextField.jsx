@@ -250,6 +250,7 @@ const ConverterTextField = ({ date, currencyList, rates }) => {
       changeCurrencyName(label, value);
     }
   };
+  // Rendering the UI
   return (
     <div className="ConverterTextField">
       <p className="date">Today&apos;s Date: {date}</p>
