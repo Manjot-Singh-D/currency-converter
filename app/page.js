@@ -53,7 +53,6 @@ export default function Home() {
     dataFromLocalStorage - get currency data from local storage
     ratesDataFromLocalStorage - get rates of currency with respect to EUR datewise. 
   */
-  const baseURL = "http://data.fixer.io/api/";
   const apiKey = `${process.env.NEXT_PUBLIC_API_KEY}`;
   const today = new Date();
   const todayDate = today.toISOString().slice(0, 10);
@@ -81,7 +80,11 @@ export default function Home() {
     else {
       // Axios Request for getting rateList and currencyList
       axios
-        .get(`${baseURL}latest?access_key=${apiKey}`)
+        .get(`https://api.apilayer.com/fixer/${todayDate}?base=USD`, {
+          headers: {
+            apikey: apiKey,
+          },
+        })
         .then((response) => {
           try {
             const currencyListValues = Object.keys(response.data.rates);

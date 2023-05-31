@@ -252,7 +252,7 @@ const ConverterTextField = ({ date, currencyList, rates }) => {
   };
   return (
     <div className="ConverterTextField">
-      <p className="date">Today's Date : {date}</p>
+      <p className="date">Today&apos;s Date: {date}</p>
       <div className="inputForms">
         <div className="fromCurrencyContainer">
           <div className="container">
