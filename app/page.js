@@ -7,6 +7,7 @@ import "./styling/mainStyle.css";
 // Components
 import IntroText from "./Components/IntroText";
 import ConverterTextField from "./Components/ConverterTextField";
+import Error from "./Components/Error";
 
 /*
   today, todayDate - Date in the format (yyyy-mm-dd)
@@ -60,7 +61,10 @@ const getData = async () => {
 };
 
 // Data required - currencyList,date,rates
-let currencyList, date, rates;
+let currencyList,
+  date,
+  rates,
+  error = false;
 
 // Home Component for rendering UI
 const Home = async () => {
@@ -73,15 +77,22 @@ const Home = async () => {
     currencyList = res.currencyList;
     date = res.date;
     rates = res.rates;
+
+    if (rates === null) {
+      error = true;
+    } else {
+      error = false;
+    }
   }
-  // Render the UI
   return (
     <div className="app">
+      {error && <Error />}
       <IntroText />
       <ConverterTextField
         date={date}
         currencyList={currencyList}
         rates={rates}
+        error={error}
       />
     </div>
   );

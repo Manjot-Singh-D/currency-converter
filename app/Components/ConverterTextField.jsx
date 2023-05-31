@@ -11,7 +11,7 @@ import ConversionRate from "./ConversionRate";
 // MUI
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 
-const ConverterTextField = ({ date, currencyList, rates }) => {
+const ConverterTextField = ({ date, currencyList, rates, error }) => {
   /*
     States
     currencyValue
@@ -266,6 +266,7 @@ const ConverterTextField = ({ date, currencyList, rates }) => {
               currencyLabel={"fromCurrency"}
               currencyList={currencyList}
               otherCurrencyName={currencyValue.toCurrency}
+              error={error}
             />
           </div>
         </div>
@@ -285,8 +286,9 @@ const ConverterTextField = ({ date, currencyList, rates }) => {
               currencyLabel={"toCurrency"}
               currencyList={currencyList}
               otherCurrencyName={currencyValue.fromCurrency}
+              error={error}
             />
-            {rates && (
+            {rates && !error && (
               <ConversionRate
                 fromCurrency={currencyValue.fromCurrency}
                 toCurrency={currencyValue.toCurrency}

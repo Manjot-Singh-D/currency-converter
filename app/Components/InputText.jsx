@@ -16,6 +16,7 @@ const InputText = ({
   currencyLabel,
   currencyList,
   otherCurrencyName,
+  error,
 }) => {
   return (
     <>
@@ -26,6 +27,7 @@ const InputText = ({
         name={valueLabel}
         onChange={handleChange}
         variant="standard"
+        disabled={error}
       />
       <FormControl>
         <Select
@@ -33,6 +35,7 @@ const InputText = ({
           onChange={handleChange}
           displayEmpty
           name={currencyLabel}
+          disabled={error}
         >
           {currencyList &&
             currencyList.map((currencyName, index) => {
