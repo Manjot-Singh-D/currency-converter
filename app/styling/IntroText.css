@@ -38,7 +38,7 @@
 
 @media screen and (max-width:480px) {
     .IntroText p{
-        font-size: 16px !important;
+        font-size: 13px !important;
         padding-left: 10px;
     }
     .IntroText .heading{

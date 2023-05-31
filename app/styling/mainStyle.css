@@ -37,9 +37,10 @@
 .ConverterTextField .date{
   margin-top: 100px;
   width: 90%;
+  margin-bottom: 1px !important;
 }
 .swappingIcon{
-  color: #1e5ef3;
+  color: #434343;
   position: absolute;
   z-index: 10;
   transform: rotate(90deg);
@@ -57,29 +58,31 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
-  
 }
+
 .container{
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  
 }
 .fromCurrencyContainer, .toCurrencyContainer{
   height: 200px;
   width: 90%;
   position: relative;
   border-radius: 15px;
+  margin: 10px;
 }
 .fromCurrencyContainer{
-  background: #2FAAE6;
+  background: #434343;
 }
 .toCurrencyContainer{
-  background:#004E80;
+  background:#434343;
 }
 .rotate {
   transform: rotate(-90deg) !important;
@@ -105,6 +108,9 @@
 @media screen and (max-width:900px){
   .ConverterTextField{
     flex: 6;
+  }
+  .container{
+    align-items: center;
   }
 }
 @media screen and (max-width:750px) {
